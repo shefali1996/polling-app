@@ -1,9 +1,10 @@
-import React from 'react'
+// import {combineReducers} from 'redux'
+// import Reg from './Register'
+// import Login from './Login'
 
-import {combineReducers} from 'redux'
+// const rootReducer = combineReducers(()=>{
+//     Reg,
+//     Login
+// })
 
-const rootReducer=combineReducers(()=>{
-    
-})
-
-export default rootReducer;
+// export default rootReducer;
