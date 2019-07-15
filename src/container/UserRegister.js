@@ -38,7 +38,7 @@ class UserRegister extends Component {
             }}
           >
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>Email Address</Form.Label>
               <Form.Control
                 type="email"
                 name="username"
@@ -61,22 +61,15 @@ class UserRegister extends Component {
                 placeholder="Password"
               />
             </Form.Group>
-            {/* <Form.Group controlId="exampleForm.ControlSelect1">
-              <Form.Label>Example select</Form.Label>
-              <Form.Control as="select">
-                <option>Admin</option>
-                <option>User</option>
-              </Form.Control>
-            </Form.Group> */}
-            <Form.Control
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>Role</Form.Label>
+              <Form.Control
                 type="text"
                 name="role"
                 value={role}
                 onChange={this.onChangeHandle}
-                placeholder="role"
+                placeholder="Role"
               />
-            <Form.Group controlId="formBasicChecbox">
-              <Form.Check type="checkbox" label="Check me out" />
             </Form.Group>
             <Button variant="primary" type="submit">
               Submit
