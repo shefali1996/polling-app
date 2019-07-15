@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PollingApp from './PollingApp'
-import {connect} from 'react-redux'
 
-class App extends Component {
+export default class App extends Component {
  
   render() {
     return (
@@ -12,12 +11,3 @@ class App extends Component {
     )
   }
 }
-const mapStateToProps=()=>{
-    
-}
-
-const mapDispatchToProps=()=>{
-
-}
-
-export default connect(mapDispatchToProps,mapStateToProps)(App);
