@@ -13,10 +13,10 @@ class UserRegister extends Component {
       [e.target.name]: e.target.value
     });
   };
-  addUser_obj = () => {
+  addUser_obj = (history) => {
     if (this.state.username && this.state.password !== "") {
       let user = { ...this.state };
-      this.props.addUser(user);
+      this.props.addUser({user,history});
       this.setState({
         username: "",
         password: "",
@@ -34,7 +34,7 @@ class UserRegister extends Component {
             controlId="formElem"
             onSubmit={e => {
               e.preventDefault();
-              this.addUser_obj();
+              this.addUser_obj(this.props.history);
             }}
           >
             <Form.Group controlId="formBasicEmail">
@@ -83,7 +83,7 @@ class UserRegister extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addUser: obj => dispatch(addUser(obj))
+    addUser: (user,history) => dispatch(addUser(user,history))
   };
 };
 

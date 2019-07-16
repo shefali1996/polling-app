@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import {Link} from 'react-router-dom'
+import { connect } from 'react-redux';
 
-export default class Header extends Component {
+class Header extends Component {
   render() {
     return (
       <div>
@@ -17,3 +18,15 @@ export default class Header extends Component {
     );
   }
 }
+
+const mapStateToProps=(state)=>{
+  console.log(state,'headerstate');
+  return{}
+}
+const mapDispatchToProps=(dispatch)=>{
+  return{}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)( Header);
+
+

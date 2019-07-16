@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Button, Form, Container } from "react-bootstrap";
+import { Button, Form, Container} from "react-bootstrap";
 import { connect } from "react-redux";
 import { login } from "../actions/Actions";
-import { Link } from "react-router-dom";
 
 class UserLogin extends Component {
   state = {
@@ -14,10 +13,10 @@ class UserLogin extends Component {
       [e.target.name]: e.target.value
     });
   };
-  loginUser_obj = () => {
+  loginUser_obj = (history) => {
     if (this.state.username && this.state.password !== "") {
       let user = { ...this.state };
-      this.props.login(user);
+      this.props.login({user,history});
       this.setState({
         username: "",
         password: ""
@@ -25,6 +24,7 @@ class UserLogin extends Component {
     }
   };
   render() {
+    console.log(this.props.history,'nnhvgfdsedghvgfdtuibn');
     var { username, password } = this.state;
     return (
       <div>
@@ -33,7 +33,7 @@ class UserLogin extends Component {
             controlId="formElem"
             onSubmit={e => {
               e.preventDefault();
-              this.loginUser_obj();
+              this.loginUser_obj(this.props.history);
             }}
           >
             <Form.Group controlId="formBasicEmail">
@@ -60,11 +60,9 @@ class UserLogin extends Component {
                 onChange={this.onChangeHandle}
               />
             </Form.Group>
-            <Link to="/Userlogin">
               <Button variant="primary" type="submit">
                 Sign In
               </Button>
-            </Link>
           </Form>
         </Container>
       </div>
@@ -74,7 +72,7 @@ class UserLogin extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: user => dispatch(login(user))
+    login: (user,history) => dispatch(login(user,history))
   };
 };
 

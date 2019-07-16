@@ -12,7 +12,10 @@ import rootReducer from "./reducers/Reducer";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(rootReducer, applyMiddleware(logger, sagaMiddleware));
+const store = createStore(rootReducer,
+  
+   applyMiddleware(logger, sagaMiddleware),
+   );
 
 sagaMiddleware.run(rootSaga);
 ReactDOM.render(
