@@ -6,11 +6,11 @@ class UserRegister extends Component {
   state = {
     username: "",
     password: "",
-    role:''
+    role: ""
   };
   onChangeHandle = e => {
     this.setState({
-     [e.target.name] : e.target.value
+      [e.target.name]: e.target.value
     });
   };
   addUser_obj = () => {
@@ -20,13 +20,13 @@ class UserRegister extends Component {
       this.setState({
         username: "",
         password: "",
-        role:''
+        role: ""
       });
     }
   };
 
   render() {
-    var { username, password,role } = this.state;
+    var { username, password, role } = this.state;
     return (
       <div>
         <Container>
@@ -72,7 +72,7 @@ class UserRegister extends Component {
               />
             </Form.Group>
             <Button variant="primary" type="submit">
-              Submit
+              Sign Up
             </Button>
           </Form>
         </Container>

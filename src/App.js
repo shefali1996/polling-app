@@ -1,12 +1,22 @@
 import React, { Component } from 'react'
-import PollingApp from './PollingApp'
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Header from "./components/Header";
+import UserRegister from "./container/UserRegister";
+import UserLogin from "./container/UserLogin";
+import '../src/App.css'
 
 export default class App extends Component {
  
   render() {
     return (
       <div>
-        <PollingApp />
+        <BrowserRouter>
+          <Header />
+          <Switch>
+            <Route component={UserRegister} path="/register" />
+            <Route component={UserLogin} exact path="/" />
+          </Switch>
+        </BrowserRouter>
       </div>
     )
   }
