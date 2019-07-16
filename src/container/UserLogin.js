@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Button, Form, Container } from "react-bootstrap";
 import { connect } from "react-redux";
-import {login} from '../actions/Actions'
+import { login } from "../actions/Actions";
+import { Link } from "react-router-dom";
 
 class UserLogin extends Component {
   state = {
@@ -24,7 +25,7 @@ class UserLogin extends Component {
     }
   };
   render() {
-    var { username, password} = this.state;
+    var { username, password } = this.state;
     return (
       <div>
         <Container>
@@ -59,9 +60,11 @@ class UserLogin extends Component {
                 onChange={this.onChangeHandle}
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Sign In
-            </Button>
+            <Link to="/Userlogin">
+              <Button variant="primary" type="submit">
+                Sign In
+              </Button>
+            </Link>
           </Form>
         </Container>
       </div>
@@ -70,19 +73,16 @@ class UserLogin extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      login:(user)=>dispatch(login(user)),
-    };
+  return {
+    login: user => dispatch(login(user))
   };
-  
-  const mapStateToProps = state => {
-    return{
+};
 
-    };
-  };
-  
-  export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(UserLogin);
-  
+const mapStateToProps = state => {
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserLogin);

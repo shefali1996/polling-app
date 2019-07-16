@@ -1,5 +1,5 @@
 const initialState={
-    polls:[],
+    poll:{},
 }
 
 const CreatePollReducer=(state=initialState,actions)=>{
