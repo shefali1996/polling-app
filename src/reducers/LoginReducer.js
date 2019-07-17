@@ -10,12 +10,17 @@ export const LoginReducer = (state = initialState, action) => {
       if (action.payload.error === 0) {
         return {
           ...state,
-          error: 0
+          error:0
         };
       } else
         return {
           ...state,
         };
+      case 'CHANGE_ERROR_VALUE':
+        return{
+          ...state,
+          error:!state.error
+        }
   }
   return state;
 };

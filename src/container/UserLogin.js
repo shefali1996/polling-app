@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import { Button, Form, Container} from "react-bootstrap";
 import { connect } from "react-redux";
-import { login } from "../actions/Actions";
+import { login,changeErrorValue } from "../actions/Actions";
 
 class UserLogin extends Component {
+
+  componentDidMount(){
+      this.props.changeErrorValue()
+    }
+
   state = {
     username: "",
     password: ""
@@ -24,7 +29,6 @@ class UserLogin extends Component {
     }
   };
   render() {
-    console.log(this.props.history,'nnhvgfdsedghvgfdtuibn');
     var { username, password } = this.state;
     return (
       <div>
@@ -72,12 +76,13 @@ class UserLogin extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: (user,history) => dispatch(login(user,history))
+    login: (user,history) => dispatch(login(user,history)),
+    changeErrorValue:()=>dispatch(changeErrorValue())
   };
 };
 
 const mapStateToProps = state => {
-  return {};
+  return {}
 };
 
 export default connect(

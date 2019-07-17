@@ -5,6 +5,7 @@ import UserRegister from "./container/UserRegister";
 import UserLogin from "./container/UserLogin";
 import CreatePoll from './container/CreatePoll'
 import '../src/App.css'
+import ListUsers from './container/ListUsers'
 import { createBrowserHistory } from 'history';
  
 export const history = createBrowserHistory();
@@ -20,7 +21,8 @@ export default class App extends Component {
           <Switch>
             <Route component={UserRegister} path="/register" />
             <Route component={UserLogin} exact path="/" />
-            <Route component={CreatePoll} path='/Userlogin'/>
+            <Route component={CreatePoll} path='/create-poll'/>
+            <Route component={ListUsers} path='/list-users'/>
           </Switch>
         </BrowserRouter>
       </div>
