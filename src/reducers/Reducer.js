@@ -1,10 +1,15 @@
-// import {combineReducers} from 'redux'
-// import Reg from './Register'
-// import Login from './Login'
+import {combineReducers} from 'redux'
+import {ViewPollReducer} from './view-poll-reducer'
+import {CreatePollReducer} from './create-poll-reducer'
+import {LoginReducer} from './LoginReducer'
+import {ListUsersReducer} from './ListUsersReducer'
 
-// const rootReducer = combineReducers(()=>{
-//     Reg,
-//     Login
-// })
+const rootReducer = combineReducers(
+   { LoginReducer,
+    ListUsersReducer
+}
+    //  ViewPollReducer,
+    //  CreatePollReducer
+);
 
-// export default rootReducer;
+export default rootReducer;
