@@ -16,11 +16,11 @@ class ViewPoll extends Component {
           <Card>
             <Card.Header>{this.props.poll.title}</Card.Header>
           </Card>
-          {this.props.poll.options.map((val, index) => {
+          {this.props.poll.options && this.props.poll.options.map((val, index) => {
             return (
               <Form.Check
                 type="radio"
-                label={val.option}
+                label={val.option[index]}
                 name="formHorizontalRadios"
                 id="formHorizontalRadios1"
               />
