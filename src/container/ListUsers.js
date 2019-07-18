@@ -5,7 +5,6 @@ import { Container } from "react-bootstrap";
 
 class ListUsers extends Component {
   componentDidMount() {
-    this.props.changeErrorValue()
     this.props.listUsers();
   }
   render() {
@@ -13,7 +12,6 @@ class ListUsers extends Component {
       <Container>
         <div>
           {this.props.data.map((val, index) => {
-            console.log(val[0], "4444444444444");
             return (
               <div>
                 {val.map((innerval, index) => {
@@ -35,7 +33,6 @@ class ListUsers extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state.ListUsersReducer);
   return {
     data: state.ListUsersReducer.data
   };
@@ -43,7 +40,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     listUsers: () => dispatch(listUsers()),
-    changeErrorValue:()=>dispatch(changeErrorValue())
   };
 };
 

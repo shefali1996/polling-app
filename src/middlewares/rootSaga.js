@@ -1,11 +1,13 @@
 import { takeLatest, all } from "redux-saga/effects";
-import { addUser,login,addPoll,listUsers} from "./SagaActions";
+import { addUser,login,addPoll,listUsers,listAllPolls,viewPoll} from "./SagaActions";
 
 function* watchActions() {
   yield takeLatest("ADD_USER", addUser);
   yield takeLatest('LOGIN',login);
   yield takeLatest('ADD_POLL',addPoll);
   yield takeLatest('LIST_USERS',listUsers);
+  yield takeLatest('LIST_ALL_POLLS',listAllPolls)
+  yield takeLatest('VIEW_POLL',viewPoll)
 }
 export default function* rootSaga() {
   yield all([watchActions()]);

@@ -6,8 +6,8 @@ import { login,changeErrorValue } from "../actions/Actions";
 class UserLogin extends Component {
 
   componentDidMount(){
-      this.props.changeErrorValue()
-    }
+    this.props.changeErrorValue()
+  }
 
   state = {
     username: "",

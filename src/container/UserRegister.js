@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { Button, Form, Container } from "react-bootstrap";
 import { connect } from "react-redux";
-import { addUser } from "../actions/Actions";
+import { addUser,changeErrorValue } from "../actions/Actions";
 class UserRegister extends Component {
+  componentDidMount(){
+    this.props.changeErrorValue()
+  }
   state = {
     username: "",
     password: "",
@@ -83,7 +86,8 @@ class UserRegister extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addUser: (user,history) => dispatch(addUser(user,history))
+    addUser: (user,history) => dispatch(addUser(user,history)),
+    changeErrorValue:()=>dispatch(changeErrorValue())
   };
 };
 

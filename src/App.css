@@ -10,3 +10,8 @@
 .form-group .form-control{
     width:40em;
 }
+
+.card .card-header{
+    display: flex;
+    justify-content: space-between;
+}
