@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import {addPoll,changeErrorValue} from '../actions/Actions'
 
 class CreatePoll extends Component {
-  componentDidMount(){
-    this.props.changeErrorValue()
-  }
+  
   state = {
     option1:"",
     option2:"",
@@ -48,23 +46,23 @@ class CreatePoll extends Component {
             }}>
             <Form.Group controlId="formBasicTitle">
               <Form.Label>Title</Form.Label>
-              <Form.Control type="text" placeholder="Enter Title" name='title' value={title} onChange={(e)=>this.onChangeHandle(e)} />
+              <Form.Control type="text" placeholder="Enter Title" required name='title' value={title} onChange={(e)=>this.onChangeHandle(e)} />
             </Form.Group>
                 <Form.Group controlId="formBasicOption1">
                   <Form.Label>Option1</Form.Label>
-                  <Form.Control type="text" name='option1' value={option1} placeholder='option1' onChange={(e)=>this.onChangeHandle(e)}/>
+                  <Form.Control type="text" name='option1' required value={option1} placeholder='option1' onChange={(e)=>this.onChangeHandle(e)}/>
                 </Form.Group>
                 <Form.Group controlId="formBasicOption2">
                   <Form.Label>Option2</Form.Label>
-                  <Form.Control type="text" name='option2' value={option2} placeholder='option3' onChange={(e)=>this.onChangeHandle(e)}/>
+                  <Form.Control type="text" name='option2' required value={option2} placeholder='option3' onChange={(e)=>this.onChangeHandle(e)}/>
                 </Form.Group>
                 <Form.Group controlId="formBasicOption3">
                   <Form.Label>Option3</Form.Label>
-                  <Form.Control type="text" name='option3' value={option3} placeholder='option3' onChange={(e)=>this.onChangeHandle(e)}/>
+                  <Form.Control type="text" name='option3' required value={option3} placeholder='option3' onChange={(e)=>this.onChangeHandle(e)}/>
                 </Form.Group>
                 <Form.Group controlId="formBasicOption4">
                   <Form.Label>Option4</Form.Label>
-                  <Form.Control type="text" name='option4' value={option4} placeholder='option4' onChange={(e)=>this.onChangeHandle(e)}/>
+                  <Form.Control type="text" name='option4'required value={option4} placeholder='option4' onChange={(e)=>this.onChangeHandle(e)}/>
                 </Form.Group>
 
             <Button variant="primary" type="submit">

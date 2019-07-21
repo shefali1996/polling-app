@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {responseAction,listUsersSuccess} from '../actions/Actions'
+import {responseAction,listUsersSuccess,listAllPollsSuccess,viewPollSuccess} from '../actions/Actions'
 import { put } from "redux-saga/effects";
 
 // import history from '../../src/App'
@@ -40,7 +40,6 @@ const loginUserRequest = (user,history )=> {
       }&password=${user.password}`
     )
     .then(function(response) {
-      console.log(response)
       if (response.data.error === 0) {
         {
           notify("Login Sucessfull");
@@ -77,19 +76,49 @@ const addPollRequest = (poll) => {
 };
 
 const listUsersRequest = () => {
-  // const notify = alert => toast(alert);
+  const notify = alert => toast(alert);
   return axios
     .get(
       `https://secure-refuge-14993.herokuapp.com/list_users`
     )
     .then(function(response) {
-      console.log(response.data.data,'listuseresponse')
       return response.data.data
     })
     .catch(function(error) {
-      console.log(error)
+      notify(error)
     });
 };
+
+const listAllPollsRequest = () => {
+  const notify = alert => toast(alert);
+  return axios
+    .get(
+      `https://secure-refuge-14993.herokuapp.com/list_polls`
+    )
+    .then(function(response) {
+      console.log(response.data.data,'1111111111111111')
+      return response.data.data
+    })
+    .catch(function(error) {
+      notify(error)
+    });
+};
+
+const viewPollRequest = (id) => {
+  const notify = alert => toast(alert);
+  return axios
+    .post(
+      `https://secure-refuge-14993.herokuapp.com/list_poll?id=${id}`
+    )
+    .then(function(response) {
+      console.log(response.data.data,'1111111111111111')
+      return response.data.data
+    })
+    .catch(function(error) {
+      notify(error)
+    });
+};
+
 
 export function* addUser(action) {
   yield addUserRequest(action.payload.user,action.payload.history);
@@ -107,4 +136,17 @@ export function* listUsers() {
   let allUsersData=yield listUsersRequest();
   yield put(listUsersSuccess(allUsersData))
 }
+
+export function* listAllPolls() {
+  let allPollsData=yield listAllPollsRequest();
+  yield put(listAllPollsSuccess(allPollsData))
+}
+
+export function* viewPoll(action) {
+  console.log(action,'11111111111')
+  let viewPollData=yield viewPollRequest(action.payload);
+  yield put(viewPollSuccess(viewPollData))
+}
+
+
 

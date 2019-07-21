@@ -20,6 +20,7 @@ class Header extends Component {
             <Navbar.Brand>Navbar</Navbar.Brand>
             <Nav className="mr-auto">
             <Link to="/list-users">List Users</Link>
+            <Link to="/list-all-polls">List All Polls</Link>
             <Link to="/">Sign Out</Link>
             </Nav>
           </Navbar>
