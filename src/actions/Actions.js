@@ -9,7 +9,9 @@ import {
   LIST_ALL_POLLS,
   LIST_ALL_POLLS_SUCCESS,
   VIEW_POLL,
-  VIEW_POLL_SUCCESS
+  VIEW_POLL_SUCCESS,
+  DO_VOTE,
+  LOGIN_STATUS
 } from "./ActionType";
 
 export function addUser(payload) {
@@ -56,4 +58,14 @@ export function viewPoll(payload) {
 export function viewPollSuccess(payload) {
   console.log(payload, "VIEW polllllllllllll");
   return { type: VIEW_POLL_SUCCESS, payload };
+}
+
+export function doVote(payload) {
+  console.log(payload.val,'dovattteeeeeeeeeeeeeee')
+  console.log(payload, "do vote");
+  return { type: DO_VOTE, payload };
+}
+
+export function loginStatus(payload) {
+  return { type: LOGIN_STATUS, payload };
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form, Container} from "react-bootstrap";
 import { connect } from "react-redux";
-import { login,changeErrorValue } from "../actions/Actions";
+import { login,changeErrorValue,loginStatus } from "../actions/Actions";
 
 class UserLogin extends Component {
 
@@ -11,22 +11,26 @@ class UserLogin extends Component {
 
   state = {
     username: "",
-    password: ""
+    password: "",
+    loggedIn:false
   };
   onChangeHandle = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
   };
-  loginUser_obj = (history) => {
+  loginUser_obj = () => {
     if (this.state.username && this.state.password !== "") {
+      this.props.history.push('/list-all-polls')
       let user = { ...this.state };
-      this.props.login({user,history});
+      this.props.login(user);
       this.setState({
         username: "",
-        password: ""
+        password: "",
+        loggedIn:true
       });
     }
+    this.props.loginStatus(!this.state.loggedIn)
   };
   render() {
     var { username, password } = this.state;
@@ -37,7 +41,7 @@ class UserLogin extends Component {
             controlId="formElem"
             onSubmit={e => {
               e.preventDefault();
-              this.loginUser_obj(this.props.history);
+              this.loginUser_obj();
             }}
           >
             <Form.Group controlId="formBasicEmail">
@@ -76,8 +80,10 @@ class UserLogin extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: (user,history) => dispatch(login(user,history)),
-    changeErrorValue:()=>dispatch(changeErrorValue())
+    login: (user) => dispatch(login(user)),
+    changeErrorValue:()=>dispatch(changeErrorValue()),
+    loginStatus:(status)=>dispatch(loginStatus(status))
+
   };
 };
 
