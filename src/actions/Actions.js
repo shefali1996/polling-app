@@ -10,7 +10,8 @@ import {
   LIST_ALL_POLLS_SUCCESS,
   VIEW_POLL,
   VIEW_POLL_SUCCESS,
-  DO_VOTE
+  DO_VOTE,
+  LOGIN_STATUS
 } from "./ActionType";
 
 export function addUser(payload) {
@@ -63,4 +64,8 @@ export function doVote(payload) {
   console.log(payload.val,'dovattteeeeeeeeeeeeeee')
   console.log(payload, "do vote");
   return { type: DO_VOTE, payload };
+}
+
+export function loginStatus(payload) {
+  return { type: LOGIN_STATUS, payload };
 }

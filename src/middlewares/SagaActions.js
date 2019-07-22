@@ -136,14 +136,12 @@ const doVoteRequest = (val, id) => {
   return axios({
     method: "post",
     url: `https://secure-refuge-14993.herokuapp.com/do_vote?id=${id}&option_text=${val}`,
-    config: {
       headers: {
         'access_token': token
       }
-    }
   })
     .then(function(response) {
-      console.log(response);
+      notify('Vote Done')
     })
     .then(function(error) {
       console.log(error);

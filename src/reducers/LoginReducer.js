@@ -1,5 +1,6 @@
 const initialState = {
-  error: 1
+  error: 1,
+  loginStatus:false
 };
 
 export const LoginReducer = (state = initialState, action) => {
@@ -19,6 +20,18 @@ export const LoginReducer = (state = initialState, action) => {
           ...state,
           error:1
         }
+        case 'LOGIN_STATUS':
+            if(action.payload){
+              return{
+                ...state,
+                loginStatus:true,
+              }
+            }
+            else{
+              return{
+                ...state,
+              }
+            }
   }
   return state;
 };

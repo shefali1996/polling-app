@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form, Container} from "react-bootstrap";
 import { connect } from "react-redux";
-import { login,changeErrorValue } from "../actions/Actions";
+import { login,changeErrorValue,loginStatus } from "../actions/Actions";
 
 class UserLogin extends Component {
 
@@ -11,7 +11,8 @@ class UserLogin extends Component {
 
   state = {
     username: "",
-    password: ""
+    password: "",
+    loggedIn:false
   };
   onChangeHandle = e => {
     this.setState({
@@ -25,9 +26,11 @@ class UserLogin extends Component {
       this.props.login(user);
       this.setState({
         username: "",
-        password: ""
+        password: "",
+        loggedIn:true
       });
     }
+    this.props.loginStatus(!this.state.loggedIn)
   };
   render() {
     var { username, password } = this.state;
@@ -78,7 +81,8 @@ class UserLogin extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     login: (user) => dispatch(login(user)),
-    changeErrorValue:()=>dispatch(changeErrorValue())
+    changeErrorValue:()=>dispatch(changeErrorValue()),
+    loginStatus:(status)=>dispatch(loginStatus(status))
 
   };
 };
