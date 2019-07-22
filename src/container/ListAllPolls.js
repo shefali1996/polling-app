@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { listAllPolls, doVote } from "../actions/Actions";
-import { Form, Container, Card, Button,ListGroup } from "react-bootstrap";
+import { listAllPolls} from "../actions/Actions";
+import { Container, Card, Button, ListGroup } from "react-bootstrap";
 
 class ListAllPolls extends Component {
   componentDidMount() {
@@ -12,8 +12,6 @@ class ListAllPolls extends Component {
   };
 
   render() {
-    console.log(this.props.polls);
-
     return (
       <div>
         {this.props.polls &&
@@ -31,12 +29,15 @@ class ListAllPolls extends Component {
                     </Button>
                   </Card.Header>
                 </Card>
-                    <ListGroup variant="flush">
-                    {val.options.map((option, i) => {
-                  return (
-                      <ListGroup.Item><span>{option.option}</span>vote:{option.vote}<span></span></ListGroup.Item>
-                  );
-                })}
+                <ListGroup variant="flush">
+                  {val.options.map((option, i) => {
+                    return (
+                      <ListGroup.Item>
+                        <span>{option.option}</span>vote:{option.vote}
+                        <span />
+                      </ListGroup.Item>
+                    );
+                  })}
                 </ListGroup>
               </Container>
             );
