@@ -31,6 +31,13 @@ class CreatePoll extends Component {
       ]
     }
     this.props.addPoll(poll)
+    this.setState({
+      option1:"",
+      option2:"",
+      option3:"",
+      option4:"",
+      title:''
+    })
   }
   render() {
     var { title,option1,option2,option3,option4} = this.state;

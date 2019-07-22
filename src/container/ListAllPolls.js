@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { listAllPolls,viewPoll } from "../actions/Actions";
-import { Form, Container, Card, Button } from "react-bootstrap";
+import { listAllPolls,doVote} from "../actions/Actions";
+import { Form, Container, Card, Button} from "react-bootstrap";
 
 class ListAllPolls extends Component {
   componentDidMount() {
@@ -16,7 +16,7 @@ class ListAllPolls extends Component {
       
     return (
       <div>
-        {this.props.polls.map((val,index) => {
+        {this.props.polls && this.props.polls.map((val,index) => {
           return (
             <Container>
               <Card>
@@ -29,9 +29,9 @@ class ListAllPolls extends Component {
                 return (
                   <Form.Check
                     type="radio"
-                    label={option.option[i]}
-                    name="formHorizontalRadios"
-                    id="formHorizontalRadios1"
+                    label={option.option}
+                    name={"formHorizontalRadios"+index}
+                    id={option.option}
                   />
                 );
               })}

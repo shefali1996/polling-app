@@ -17,7 +17,7 @@ export const LoginReducer = (state = initialState, action) => {
       case 'CHANGE_ERROR_VALUE':
         return{
           ...state,
-          error:!state.error
+          error:1
         }
   }
   return state;

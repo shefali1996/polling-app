@@ -21,6 +21,7 @@ class Header extends Component {
             <Nav className="mr-auto">
             <Link to="/list-users">List Users</Link>
             <Link to="/list-all-polls">List All Polls</Link>
+            <Link to="/create-poll">Create Poll</Link>
             <Link to="/">Sign Out</Link>
             </Nav>
           </Navbar>

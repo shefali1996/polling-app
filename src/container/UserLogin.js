@@ -18,10 +18,11 @@ class UserLogin extends Component {
       [e.target.name]: e.target.value
     });
   };
-  loginUser_obj = (history) => {
+  loginUser_obj = () => {
     if (this.state.username && this.state.password !== "") {
+      this.props.history.push('/list-all-polls')
       let user = { ...this.state };
-      this.props.login({user,history});
+      this.props.login(user);
       this.setState({
         username: "",
         password: ""
@@ -37,7 +38,7 @@ class UserLogin extends Component {
             controlId="formElem"
             onSubmit={e => {
               e.preventDefault();
-              this.loginUser_obj(this.props.history);
+              this.loginUser_obj();
             }}
           >
             <Form.Group controlId="formBasicEmail">
@@ -76,8 +77,9 @@ class UserLogin extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: (user,history) => dispatch(login(user,history)),
+    login: (user) => dispatch(login(user)),
     changeErrorValue:()=>dispatch(changeErrorValue())
+
   };
 };
 
