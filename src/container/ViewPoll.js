@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Container, Card, Button } from "react-bootstrap";
 import { connect } from "react-redux";
-import { viewPoll, doVote } from "../actions/Actions";
+import { viewPoll, doVote,addOption } from "../actions/Actions";
 
 class ViewPoll extends Component {
   componentDidMount() {
@@ -9,13 +9,27 @@ class ViewPoll extends Component {
   }
 
   state = {
-    add: "false"
+    add: false,
+    option4:""
   };
-  addOption = () => {
+  addTextBox = () => {
     this.setState({
       add: true
     });
   };
+
+  handleChange=(e)=>{
+    this.setState({
+      option4:e.target.value
+    })
+  }
+
+  save=()=>{
+    this.props.addOption(this.state.option4,this.props.match.params.id)
+    this.setState({
+      add:false
+    })
+  }
 
   render() {
     return (
@@ -24,7 +38,7 @@ class ViewPoll extends Component {
           <Card>
             <Card.Header>
               {this.props.poll.title}
-              <Button variant="primary" onClick={this.addOption}>
+              <Button variant="primary" type="button" onClick={this.addTextBox}>
                 Add New Option
               </Button>
             </Card.Header>
@@ -46,8 +60,9 @@ class ViewPoll extends Component {
           {this.state.add && (
             <Form className="option_4">
               <Form.Group controlId="option4">
-                <Form.Label>option4</Form.Label>
-                <Form.Control type="text" placeholder="option4" />
+                <Form.Label>Option4</Form.Label>
+                <Form.Control type="text" placeholder="option4" value={this.state.option4} onChange={(e)=>this.handleChange(e)}/>
+                <Button variant="primary" type="button" onClick={this.save}>Save</Button>
               </Form.Group>
             </Form>
           )}
@@ -65,7 +80,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     viewPoll: id => dispatch(viewPoll(id)),
-    doVote: (val, id) => dispatch(doVote({ val, id }))
+    doVote: (val, id) => dispatch(doVote({ val, id })),
+    addOption:(option4,id)=>dispatch(addOption({option4,id}))
   };
 };
 
