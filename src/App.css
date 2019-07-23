@@ -19,3 +19,20 @@
 .option_4 .form-control{
     display: inline-block
 }
+
+.title{
+    width:70%;
+}
+
+.optionList{
+    justify-content: space-between;
+}
+
+.opt{
+    padding: 2%;
+}
+
+.list-group .list-group-item{
+    display:flex;
+    justify-content: space-between;
+}

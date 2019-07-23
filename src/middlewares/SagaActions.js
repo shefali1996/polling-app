@@ -11,7 +11,7 @@ import { put } from "redux-saga/effects";
 
 toast.configure();
 
-const addUserRequest = (user) => {
+const addUserRequest = user => {
   const notify = alert => toast(alert);
   axios
     .post(
@@ -137,27 +137,59 @@ const doVoteRequest = (val, id) => {
     .then(function(error) {});
 };
 
-const addOptionRequest = (option4,id)=> {
+const addOptionRequest = (option4, id) => {
   const notify = alert => toast(alert);
   return axios
-    .post(`https://secure-refuge-14993.herokuapp.com/add_new_option?id=${id}&option_text=${option4}`)
+    .post(
+      `https://secure-refuge-14993.herokuapp.com/add_new_option?id=${id}&option_text=${option4}`
+    )
     .then(function(response) {
-      notify('option Added')
+      notify("option Added");
     })
     .catch(function(error) {
-     notify(error)
+      notify(error);
     });
 };
 
-const deleteOptionRequest = (val,id)=> {
+const deleteOptionRequest = (val, id) => {
   const notify = alert => toast(alert);
   return axios
-    .post(`https://secure-refuge-14993.herokuapp.com/delete_poll_option?id=${id}&option_text=${val}`)
+    .post(
+      `https://secure-refuge-14993.herokuapp.com/delete_poll_option?id=${id}&option_text=${val}`
+    )
     .then(function(response) {
-      notify('option deleted')
+      notify("option deleted");
     })
     .catch(function(error) {
-     notify(error)
+      notify(error);
+    });
+};
+
+const updateTitleRequest = (new_title, id) => {
+  const notify = alert => toast(alert);
+  return axios
+    .post(
+      `https://secure-refuge-14993.herokuapp.com/update_poll_title?id=${id}&title=${new_title}`
+    )
+    .then(function(response) {
+      notify("title updateds");
+    })
+    .catch(function(error) {
+      notify(error);
+    });
+};
+
+const deletePollRequest = (id) => {
+  const notify = alert => toast(alert);
+  return axios
+    .post(
+      `https://secure-refuge-14993.herokuapp.com/delete_poll?id=${id}`
+    )
+    .then(function(response) {
+      notify('Poll Deleted');
+    })
+    .catch(function(error) {
+      notify(error);
     });
 };
 
@@ -200,3 +232,10 @@ export function* deleteOption(action) {
   yield deleteOptionRequest(action.payload.val, action.payload.id);
 }
 
+export function* updateTitle(action) {
+  yield updateTitleRequest(action.payload.new_title, action.payload.id);
+}
+
+export function* deletePoll(action) {
+  yield deletePollRequest(action.payload);
+}

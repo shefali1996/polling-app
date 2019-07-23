@@ -1,30 +1,34 @@
 import React, { Component } from "react";
-import { Navbar, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Navbar, Nav ,Button} from "react-bootstrap";
+import { Link,withRouter} from "react-router-dom";
 import { connect } from "react-redux";
 
 class Header extends Component {
+  sign_out=()=>{
+    this.props.history.push('/');
+    localStorage.clear('accessToken');
+  }
+    
   render() {
     return (
       <div>
-        {this.props.error ? (
+        {localStorage.getItem('accessToken') ? (
           <Navbar bg="primary" variant="dark">
-            <Navbar.Brand>Navbar</Navbar.Brand>
-            <Nav className="mr-auto">
-              <Link to="/">Login</Link>
-              <Link to="/register">Register</Link>
-            </Nav>
-          </Navbar>
+          <Nav className="mr-auto">
+            <Link to="/list-users">List Users</Link>
+            <Link to="/list-all-polls">List All Polls</Link>
+            <Link to="/create-poll">Create Poll</Link>
+          </Nav>
+          <Button variant="primary" type="button" onClick={this.sign_out}>Sign Out</Button>
+        </Navbar>
         ) : (
+          
           <Navbar bg="primary" variant="dark">
-            <Navbar.Brand>Navbar</Navbar.Brand>
-            <Nav className="mr-auto">
-              <Link to="/list-users">List Users</Link>
-              <Link to="/list-all-polls">List All Polls</Link>
-              <Link to="/create-poll">Create Poll</Link>
-              <Link to="/">Sign Out</Link>
-            </Nav>
-          </Navbar>
+          <Nav className="mr-auto">
+            <Link to="/">Login</Link>
+            <Link to="/register">Register</Link>
+          </Nav>
+        </Navbar>
         )}
       </div>
     );
@@ -40,7 +44,7 @@ const mapDispatchToProps = dispatch => {
   return {};
 };
 
-export default connect(
+export default withRouter( connect(
   mapStateToProps,
   mapDispatchToProps
-)(Header);
+)(Header));

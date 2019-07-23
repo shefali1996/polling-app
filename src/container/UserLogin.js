@@ -1,18 +1,14 @@
 import React, { Component } from "react";
-import { Button, Form, Container} from "react-bootstrap";
+import { withRouter } from "react-router-dom";
+import { Button, Form, Container } from "react-bootstrap";
 import { connect } from "react-redux";
-import { login,changeErrorValue,loginStatus } from "../actions/Actions";
+import { login, changeErrorValue, loginStatus } from "../actions/Actions";
 
 class UserLogin extends Component {
-
-  componentDidMount(){
-    this.props.changeErrorValue()
-  }
-
   state = {
     username: "",
     password: "",
-    loggedIn:false
+    loggedIn: false
   };
   onChangeHandle = e => {
     this.setState({
@@ -21,17 +17,20 @@ class UserLogin extends Component {
   };
   loginUser_obj = () => {
     if (this.state.username && this.state.password !== "") {
-      this.props.history.push('/list-all-polls')
       let user = { ...this.state };
       this.props.login(user);
       this.setState({
         username: "",
         password: "",
-        loggedIn:true
+        loggedIn: true
       });
     }
-    this.props.loginStatus(!this.state.loggedIn)
+    this.props.loginStatus(!this.state.loggedIn);
   };
+  componentDidUpdate(props) {
+    localStorage.getItem("accessToken") &&
+      this.props.history.push("/list-all-polls");
+  }
   render() {
     var { username, password } = this.state;
     return (
@@ -68,9 +67,9 @@ class UserLogin extends Component {
                 onChange={this.onChangeHandle}
               />
             </Form.Group>
-              <Button variant="primary" type="submit">
-                Sign In
-              </Button>
+            <Button variant="primary" type="submit">
+              Sign In
+            </Button>
           </Form>
         </Container>
       </div>
@@ -80,18 +79,21 @@ class UserLogin extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: (user) => dispatch(login(user)),
-    changeErrorValue:()=>dispatch(changeErrorValue()),
-    loginStatus:(status)=>dispatch(loginStatus(status))
-
+    login: user => dispatch(login(user)),
+    changeErrorValue: () => dispatch(changeErrorValue()),
+    loginStatus: status => dispatch(loginStatus(status))
   };
 };
 
 const mapStateToProps = state => {
-  return {}
+  return {
+    state: state.LoginReducer
+  };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UserLogin);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(UserLogin)
+);

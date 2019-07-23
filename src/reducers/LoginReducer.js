@@ -1,6 +1,7 @@
 const initialState = {
   error: 1,
-  loginStatus:false
+  token:'',
+  loginStatus: false
 };
 
 export const LoginReducer = (state = initialState, action) => {
@@ -9,31 +10,29 @@ export const LoginReducer = (state = initialState, action) => {
       if (action.payload.error === 0) {
         return {
           ...state,
-          error:0
+          error: action.payload.error,
+          token:action.payload.token
         };
       } else
         return {
-          ...state,
+          ...state
         };
-      case 'CHANGE_ERROR_VALUE':
-        return{
+    case "CHANGE_ERROR_VALUE":
+      return {
+        ...state,
+        error: 1
+      };
+    case "LOGIN_STATUS":
+      if (action.payload) {
+        return {
           ...state,
-          error:1
-        }
-        case 'LOGIN_STATUS':
-            if(action.payload){
-              return{
-                ...state,
-                loginStatus:true,
-              }
-            }
-            else{
-              return{
-                ...state,
-              }
-            }
+          loginStatus: true
+        };
+      } else {
+        return {
+          ...state
+        };
+      }
   }
   return state;
 };
-
-

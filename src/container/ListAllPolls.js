@@ -1,16 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { listAllPolls} from "../actions/Actions";
-import { Container, Card, Button, ListGroup } from "react-bootstrap";
+import{withRouter} from 'react-router-dom'
+import { listAllPolls,deletePoll } from "../actions/Actions";
+import { Container, Card, Button, ListGroup, Badge } from "react-bootstrap";
 
 class ListAllPolls extends Component {
   componentDidMount() {
     this.props.listAllPolls();
   }
   handlePollClick = id => {
-    console.log(this.props.history,'gggggggggggg')
     this.props.history.push(`/list-all-polls/${id}`);
   };
+
+  deletePollClick=(id)=>{
+    this.props.deletePoll(id);
+    this.props.listAllPolls();
+  }
 
   render() {
     return (
@@ -21,21 +26,30 @@ class ListAllPolls extends Component {
               <Container>
                 <Card>
                   <Card.Header>
-                    {val.title}
+                    <div className='title'>{val.title}</div>
                     <Button
                       variant="primary"
                       onClick={() => this.handlePollClick(val._id)}
                     >
                       View Poll
                     </Button>
+                    <Button
+                      variant="primary"
+                      onClick={() => this.deletePollClick(val._id)}
+                    >
+                      Delete Poll
+                    </Button>
                   </Card.Header>
                 </Card>
-                <ListGroup variant="flush">
+                <ListGroup>
                   {val.options.map((option, i) => {
                     return (
                       <ListGroup.Item>
-                        <span name={index}>{option.option}</span>vote:{option.vote}
-                        <span />
+                        <span>{option.option}</span>
+                        <Button variant="success">
+                          Votes <Badge variant="light">{option.vote}</Badge>
+                          <span className="sr-only">unread messages</span>
+                        </Button>
                       </ListGroup.Item>
                     );
                   })}
@@ -56,11 +70,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    listAllPolls: () => dispatch(listAllPolls())
+    listAllPolls: () => dispatch(listAllPolls()),
+    deletePoll:(id)=>dispatch(deletePoll(id))
   };
 };
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(ListAllPolls);
+)(ListAllPolls));

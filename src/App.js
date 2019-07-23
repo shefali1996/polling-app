@@ -13,9 +13,9 @@ import { connect } from "react-redux";
  class PrivateRoute extends Component{
 render(){
   return(
-    <>
+    <div>
     {localStorage.getItem("accessToken")?this.props.children:<Redirect to='/' />}
-    </>
+    </div>
   )
 }
 }
@@ -53,7 +53,8 @@ const mapDispatchToProps = dispatch => {
   return {};
 };
 
-export default (withRouter,connect(
+
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App));
+)(App);

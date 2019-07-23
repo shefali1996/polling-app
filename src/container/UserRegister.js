@@ -3,9 +3,7 @@ import { Button, Form, Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import { addUser,changeErrorValue } from "../actions/Actions";
 class UserRegister extends Component {
-  componentDidMount(){
-    this.props.changeErrorValue()
-  }
+
   state = {
     username: "",
     password: "",
