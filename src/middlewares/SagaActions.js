@@ -179,14 +179,12 @@ const updateTitleRequest = (new_title, id) => {
     });
 };
 
-const deletePollRequest = (id) => {
+const deletePollRequest = id => {
   const notify = alert => toast(alert);
   return axios
-    .post(
-      `https://secure-refuge-14993.herokuapp.com/delete_poll?id=${id}`
-    )
+    .post(`https://secure-refuge-14993.herokuapp.com/delete_poll?id=${id}`)
     .then(function(response) {
-      notify('Poll Deleted');
+      notify("Poll Deleted");
     })
     .catch(function(error) {
       notify(error);

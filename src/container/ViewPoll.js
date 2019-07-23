@@ -8,7 +8,7 @@ import {
   deleteOption,
   updateTitle
 } from "../actions/Actions";
-
+import isEqual from "lodash/isEqual"
 class ViewPoll extends Component {
   componentDidMount() {
     this.props.viewPoll(this.props.match.params.id);
@@ -56,8 +56,10 @@ class ViewPoll extends Component {
     });
   };
 
-  componentDidUpdate() {
+  componentDidUpdate(props) {
+    if(!isEqual(props,this.props)){
     this.props.viewPoll(this.props.match.params.id);
+    }
   }
 
   render() {
@@ -66,7 +68,7 @@ class ViewPoll extends Component {
         <Container>
           <Card>
             <Card.Header>
-              <div className="title">{this.props.poll.title}</div>
+              <div className="title">{this.props.poll && this.props.poll.title}</div>
               {this.state.update ? (
                 <Form.Group controlId="new_title">
                   <Row>
@@ -104,6 +106,7 @@ class ViewPoll extends Component {
                     <Row className="optionList">
                       <Form.Check
                         type="radio"
+                        defaultChecked={val}
                         onClick={e =>
                           this.props.doVote(
                             e.target.id,
