@@ -19,10 +19,10 @@ class Header extends Component {
           <Navbar bg="primary" variant="dark">
             <Navbar.Brand>Navbar</Navbar.Brand>
             <Nav className="mr-auto">
-            <Link to="/list-users">List Users</Link>
-            <Link to="/list-all-polls">List All Polls</Link>
-            <Link to="/create-poll">Create Poll</Link>
-            <Link to="/">Sign Out</Link>
+              <Link to="/list-users">List Users</Link>
+              <Link to="/list-all-polls">List All Polls</Link>
+              <Link to="/create-poll">Create Poll</Link>
+              <Link to="/">Sign Out</Link>
             </Nav>
           </Navbar>
         )}

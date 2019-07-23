@@ -9,8 +9,6 @@ import {
 } from "../actions/Actions";
 import { put } from "redux-saga/effects";
 
-// import history from '../../src/App'
-
 toast.configure();
 
 const addUserRequest = (user, history) => {
@@ -47,13 +45,8 @@ const loginUserRequest = user => {
     .then(function(response) {
       if (response.data.error === 0) {
         {
-          console.log(response.data.token, "login user");
           if (typeof Storage !== "undefined") {
             localStorage.setItem("accessToken", response.data.token);
-            console.log(
-              localStorage.getItem("accessToken"),
-              "accessTokennnnnnnnnnnnn"
-            );
           }
           notify("Login Sucessfull");
         }
@@ -68,7 +61,6 @@ const loginUserRequest = user => {
 };
 
 const addPollRequest = poll => {
-  console.log(poll, "pollllllllllllllll");
   const notify = alert => toast(alert);
   axios
     .post(
@@ -129,21 +121,29 @@ const viewPollRequest = id => {
 };
 
 const doVoteRequest = (val, id) => {
-  console.log(val, id, "aaaaaaaaaaaaaa");
   const notify = alert => toast(alert);
   let token = localStorage.getItem("accessToken");
-  console.log(token,'tokennnnnnnnnnnnnnn')
+
   return axios({
     method: "post",
     url: `https://secure-refuge-14993.herokuapp.com/do_vote?id=${id}&option_text=${val}`,
-      headers: {
-        'access_token': token
-      }
+    headers: {
+      access_token: token
+    }
   })
     .then(function(response) {
-      notify('Vote Done')
+      notify("Vote Done");
     })
-    .then(function(error) {
+    .then(function(error) {});
+};
+
+const addOptionRequest = (option4,id)=> {
+  return axios
+    .post(`https://secure-refuge-14993.herokuapp.com/list_poll?id=${id}`)
+    .then(function(response) {
+      console.log(response);
+    })
+    .catch(function(error) {
       console.log(error);
     });
 };
@@ -171,12 +171,15 @@ export function* listAllPolls() {
 }
 
 export function* viewPoll(action) {
-  console.log(action, "11111111111");
   let viewPollData = yield viewPollRequest(action.payload);
   yield put(viewPollSuccess(viewPollData));
 }
 
 export function* doVote(action) {
-  console.log(action.payload.val, action.payload.id, "000000000000");
   yield doVoteRequest(action.payload.val, action.payload.id);
 }
+
+export function* addOption(action) {
+  yield addOptionRequest(action.payload.option4, action.payload.id);
+}
+

@@ -11,7 +11,8 @@ import {
   VIEW_POLL,
   VIEW_POLL_SUCCESS,
   DO_VOTE,
-  LOGIN_STATUS
+  LOGIN_STATUS,
+  ADD_OPTION
 } from "./ActionType";
 
 export function addUser(payload) {
@@ -51,21 +52,23 @@ export function listAllPollsSuccess(payload) {
 }
 
 export function viewPoll(payload) {
-  console.log(payload, "polllllllllllll");
+ 
   return { type: VIEW_POLL, payload };
 }
 
 export function viewPollSuccess(payload) {
-  console.log(payload, "VIEW polllllllllllll");
+ 
   return { type: VIEW_POLL_SUCCESS, payload };
 }
 
 export function doVote(payload) {
-  console.log(payload.val,'dovattteeeeeeeeeeeeeee')
-  console.log(payload, "do vote");
   return { type: DO_VOTE, payload };
 }
 
 export function loginStatus(payload) {
   return { type: LOGIN_STATUS, payload };
+}
+
+export function addOption(payload) {
+  return { type: ADD_OPTION, payload };
 }
