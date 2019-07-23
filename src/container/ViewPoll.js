@@ -18,7 +18,7 @@ class ViewPoll extends Component {
     add: false,
     update: false,
     new_option: "",
-    new_title: ""
+    new_title: "",
   };
   addTextBox = () => {
     this.setState({
@@ -37,12 +37,10 @@ class ViewPoll extends Component {
     this.setState({
       add: false
     });
-    this.props.viewPoll(this.props.match.params.id);
   };
 
   delete = val => {
     this.props.deleteOption(val, this.props.match.params.id);
-    this.props.viewPoll(this.props.match.params.id);
   };
 
   updateTextBox = () => {
@@ -52,13 +50,15 @@ class ViewPoll extends Component {
   };
 
   update = () => {
-    console.log(this.state.new_title, "updateeeeeeeeeeeeee");
     this.props.updateTitle(this.state.new_title, this.props.match.params.id);
     this.setState({
       update: false
     });
-    this.props.viewPoll(this.props.match.params.id);
   };
+
+  componentDidUpdate() {
+    this.props.viewPoll(this.props.match.params.id);
+  }
 
   render() {
     return (
@@ -69,6 +69,7 @@ class ViewPoll extends Component {
               <div className="title">{this.props.poll.title}</div>
               {this.state.update ? (
                 <Form.Group controlId="new_title">
+                  <Row>
                   <Form.Control
                     type="text"
                     placeholder="Title"
@@ -79,6 +80,7 @@ class ViewPoll extends Component {
                   <Button variant="primary" type="button" onClick={this.update}>
                     Update
                   </Button>
+                  </Row>
                 </Form.Group>
               ) : (
                 <Button

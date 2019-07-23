@@ -14,6 +14,9 @@ class ListAllPolls extends Component {
 
   deletePollClick=(id)=>{
     this.props.deletePoll(id);
+  }
+
+  componentDidUpdate=()=>{
     this.props.listAllPolls();
   }
 
