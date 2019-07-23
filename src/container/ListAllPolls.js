@@ -34,7 +34,7 @@ class ListAllPolls extends Component {
                   {val.options.map((option, i) => {
                     return (
                       <ListGroup.Item>
-                        <span>{option.option}</span>vote:{option.vote}
+                        <span name={index}>{option.option}</span>vote:{option.vote}
                         <span />
                       </ListGroup.Item>
                     );

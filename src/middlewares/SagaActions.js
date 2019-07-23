@@ -149,6 +149,18 @@ const addOptionRequest = (option4,id)=> {
     });
 };
 
+const deleteOptionRequest = (val,id)=> {
+  const notify = alert => toast(alert);
+  return axios
+    .post(`https://secure-refuge-14993.herokuapp.com/delete_poll_option?id=${id}&option_text=${val}`)
+    .then(function(response) {
+      notify('option deleted')
+    })
+    .catch(function(error) {
+     notify(error)
+    });
+};
+
 export function* addUser(action) {
   yield addUserRequest(action.payload);
 }
@@ -182,5 +194,9 @@ export function* doVote(action) {
 
 export function* addOption(action) {
   yield addOptionRequest(action.payload.option4, action.payload.id);
+}
+
+export function* deleteOption(action) {
+  yield deleteOptionRequest(action.payload.val, action.payload.id);
 }
 
