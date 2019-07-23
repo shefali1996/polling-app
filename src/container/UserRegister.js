@@ -16,10 +16,10 @@ class UserRegister extends Component {
       [e.target.name]: e.target.value
     });
   };
-  addUser_obj = (history) => {
+  addUser_obj = () => {
     if (this.state.username && this.state.password !== "") {
       let user = { ...this.state };
-      this.props.addUser({user,history});
+      this.props.addUser(user);
       this.setState({
         username: "",
         password: "",
@@ -86,7 +86,7 @@ class UserRegister extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addUser: (user,history) => dispatch(addUser(user,history)),
+    addUser: (user) => dispatch(addUser(user)),
     changeErrorValue:()=>dispatch(changeErrorValue())
   };
 };

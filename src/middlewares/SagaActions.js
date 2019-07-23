@@ -11,7 +11,7 @@ import { put } from "redux-saga/effects";
 
 toast.configure();
 
-const addUserRequest = (user, history) => {
+const addUserRequest = (user) => {
   const notify = alert => toast(alert);
   axios
     .post(
@@ -23,7 +23,7 @@ const addUserRequest = (user, history) => {
       if (response.data.error === 0) {
         {
           notify("User Added Sucessfully");
-          history.push("/");
+          this.props.history.push("/");
         }
       } else {
         notify(response.data.message);
@@ -138,18 +138,19 @@ const doVoteRequest = (val, id) => {
 };
 
 const addOptionRequest = (option4,id)=> {
+  const notify = alert => toast(alert);
   return axios
-    .post(`https://secure-refuge-14993.herokuapp.com/list_poll?id=${id}`)
+    .post(`https://secure-refuge-14993.herokuapp.com/add_new_option?id=${id}&option_text=${option4}`)
     .then(function(response) {
-      console.log(response);
+      notify('option Added')
     })
     .catch(function(error) {
-      console.log(error);
+     notify(error)
     });
 };
 
 export function* addUser(action) {
-  yield addUserRequest(action.payload.user, action.payload.history);
+  yield addUserRequest(action.payload);
 }
 
 export function* login(action) {

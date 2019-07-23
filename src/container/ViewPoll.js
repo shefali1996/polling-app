@@ -26,6 +26,9 @@ class ViewPoll extends Component {
 
   save=()=>{
     this.props.addOption(this.state.option4,this.props.match.params.id)
+    this.setState({
+      add:false
+    })
   }
 
   render() {
@@ -35,7 +38,7 @@ class ViewPoll extends Component {
           <Card>
             <Card.Header>
               {this.props.poll.title}
-              <Button variant="primary" onClick={this.addTextBox}>
+              <Button variant="primary" type="button" onClick={this.addTextBox}>
                 Add New Option
               </Button>
             </Card.Header>
@@ -78,7 +81,7 @@ const mapDispatchToProps = dispatch => {
   return {
     viewPoll: id => dispatch(viewPoll(id)),
     doVote: (val, id) => dispatch(doVote({ val, id })),
-    addOption:(option4,id)=>dispatch({option4,id})
+    addOption:(option4,id)=>dispatch(addOption({option4,id}))
   };
 };
 

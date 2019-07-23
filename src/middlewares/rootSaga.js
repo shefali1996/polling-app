@@ -11,7 +11,6 @@ function* watchActions() {
   yield takeLatest('DO_VOTE',doVote)
   yield takeLatest('ADD_OPTION',addOption)
 }
-}
 export default function* rootSaga() {
   yield all([watchActions()]);
 }
