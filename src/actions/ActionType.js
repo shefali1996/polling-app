@@ -13,4 +13,5 @@ export const VIEW_POLL_SUCCESS = "VIEW_POLL_SUCCESS";
 export const DO_VOTE = "DO_VOTE";
 export const LOGIN_STATUS = "LOGIN_STATUS";
 export const ADD_OPTION = "ADD_OPTION";
+export const DELETE_OPTION = "DELETE_OPTION";
 

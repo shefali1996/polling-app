@@ -12,7 +12,8 @@ import {
   VIEW_POLL_SUCCESS,
   DO_VOTE,
   LOGIN_STATUS,
-  ADD_OPTION
+  ADD_OPTION,
+  DELETE_OPTION
 } from "./ActionType";
 
 export function addUser(payload) {
@@ -71,4 +72,8 @@ export function loginStatus(payload) {
 
 export function addOption(payload) {
   return { type: ADD_OPTION, payload };
+}
+
+export function deleteOption(payload) {
+  return { type: DELETE_OPTION, payload };
 }
