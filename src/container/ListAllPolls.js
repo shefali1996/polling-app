@@ -8,6 +8,7 @@ class ListAllPolls extends Component {
     this.props.listAllPolls();
   }
   handlePollClick = id => {
+    console.log(this.props.history,'gggggggggggg')
     this.props.history.push(`/list-all-polls/${id}`);
   };
 
