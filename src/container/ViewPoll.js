@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Form, Container, Card, Button, Row } from "react-bootstrap";
+import {
+  Form,
+  Container,
+  Card,
+  Button,
+  Row,
+  ButtonToolbar
+} from "react-bootstrap";
 import { connect } from "react-redux";
 import {
   viewPoll,
@@ -8,7 +15,7 @@ import {
   deleteOption,
   updateTitle
 } from "../actions/Actions";
-import isEqual from "lodash/isEqual"
+
 class ViewPoll extends Component {
   componentDidMount() {
     this.props.viewPoll(this.props.match.params.id);
@@ -19,6 +26,7 @@ class ViewPoll extends Component {
     update: false,
     new_option: "",
     new_title: "",
+    text: ""
   };
   addTextBox = () => {
     this.setState({
@@ -45,7 +53,15 @@ class ViewPoll extends Component {
 
   updateTextBox = () => {
     this.setState({
-      update: true
+      update: true,
+      new_title: this.props.poll.title
+    });
+  };
+
+  cancel = () => {
+    this.setState({
+      new_title: this.state.text,
+      update: false
     });
   };
 
@@ -56,42 +72,53 @@ class ViewPoll extends Component {
     });
   };
 
-  componentDidUpdate(props) {
-    if(!isEqual(props,this.props)){
-    this.props.viewPoll(this.props.match.params.id);
-    }
-  }
-
   render() {
     return (
       <div>
         <Container>
           <Card>
             <Card.Header>
-              <div className="title">{this.props.poll && this.props.poll.title}</div>
               {this.state.update ? (
                 <Form.Group controlId="new_title">
                   <Row>
-                  <Form.Control
-                    type="text"
-                    placeholder="Title"
-                    value={this.state.new_title}
-                    name="new_title"
-                    onChange={e => this.handleChange(e)}
-                  />
-                  <Button variant="primary" type="button" onClick={this.update}>
-                    Update
-                  </Button>
+                    <Form.Control
+                      type="text"
+                      placeholder="Title"
+                      value={this.state.new_title}
+                      name="new_title"
+                      onChange={e => this.handleChange(e)}
+                    />
+                    <ButtonToolbar>
+                      <Button
+                        variant="primary"
+                        type="button"
+                        onClick={this.update}
+                      >
+                        Update
+                      </Button>
+                      <Button
+                        variant="danger"
+                        type="button"
+                        onClick={this.cancel}
+                      >
+                        x
+                      </Button>
+                    </ButtonToolbar>
                   </Row>
                 </Form.Group>
               ) : (
-                <Button
-                  variant="primary"
-                  type="button"
-                  onClick={this.updateTextBox}
-                >
-                  Update Poll Title
-                </Button>
+                <Row>
+                  <div className="title">
+                    {this.props.poll && this.props.poll.title}
+                  </div>
+                  <Button
+                    variant="primary"
+                    type="button"
+                    onClick={this.updateTextBox}
+                  >
+                    Update Poll Title
+                  </Button>
+                </Row>
               )}
               <Button variant="primary" type="button" onClick={this.addTextBox}>
                 Add New Option
@@ -99,14 +126,15 @@ class ViewPoll extends Component {
             </Card.Header>
           </Card>
           <div className="opt">
-            {this.props.poll.options &&
+            {this.props.poll &&
+              this.props.poll.options &&
               this.props.poll.options.map((val, index) => {
                 return (
                   <Form.Group>
                     <Row className="optionList">
                       <Form.Check
                         type="radio"
-                        defaultChecked={val}
+                        checked={val.vote === 1 ? true : false}
                         onClick={e =>
                           this.props.doVote(
                             e.target.id,
@@ -153,8 +181,12 @@ class ViewPoll extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state.ListAllPollsReducer.deleteOptionData, "aaaaaaaa");
   return {
-    poll: state.ListAllPollsReducer.poll
+    poll: state.ListAllPollsReducer.poll,
+    addOptionData: state.ListAllPollsReducer.addOptionData,
+    deleteOptionData: state.ListAllPollsReducer.deleteOptionData,
+    updateTitleData: state.ListAllPollsReducer.updateTitleData
   };
 };
 const mapDispatchToProps = dispatch => {

@@ -4,6 +4,7 @@ import {
   RESPONSE_ACTION,
   CHANGE_ERROR_VALUE,
   ADD_POLL,
+  ADD_POLL_SUCCESS,
   LIST_USERS,
   LIST_USERS_SUCESS,
   LIST_ALL_POLLS,
@@ -13,9 +14,12 @@ import {
   DO_VOTE,
   LOGIN_STATUS,
   ADD_OPTION,
+  ADD_OPTION_SUCCESS,
   DELETE_OPTION,
   UPDATE_TITLE,
-  DELETE_POLL
+  DELETE_POLL,
+  DELETE_OPTION_SUCCESS,
+  UPDATE_TITLE_SUCCESS
 } from "./ActionType";
 
 export function addUser(payload) {
@@ -36,6 +40,10 @@ export function changeErrorValue(payload) {
 
 export function addPoll(payload) {
   return { type: ADD_POLL, payload };
+}
+
+export function addPollSuccess(payload) {
+  return { type: ADD_POLL_SUCCESS, payload };
 }
 
 export function listUsers(payload) {
@@ -76,14 +84,26 @@ export function addOption(payload) {
   return { type: ADD_OPTION, payload };
 }
 
+export function addOptionSuccess(payload) {
+  return { type: ADD_OPTION_SUCCESS, payload };
+}
+
 export function deleteOption(payload) {
   return { type: DELETE_OPTION, payload };
+}
+export function deleteOptionSuccess(payload) {
+  return { type: DELETE_OPTION_SUCCESS, payload };
 }
 
 export function updateTitle(payload) {
   return { type: UPDATE_TITLE, payload };
 }
 
+export function updateTitleSuccess(payload) {
+  return { type: UPDATE_TITLE_SUCCESS, payload };
+}
+
 export function deletePoll(payload) {
   return { type: DELETE_POLL, payload };
 }
+

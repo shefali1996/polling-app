@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import{withRouter} from 'react-router-dom'
 import { listAllPolls,deletePoll } from "../actions/Actions";
 import { Container, Card, Button, ListGroup, Badge } from "react-bootstrap";
+import isEqual from 'lodash/isEqual'
 
 class ListAllPolls extends Component {
   componentDidMount() {
@@ -16,8 +17,10 @@ class ListAllPolls extends Component {
     this.props.deletePoll(id);
   }
 
-  componentDidUpdate=()=>{
-    this.props.listAllPolls();
+  componentDidUpdate=(props)=>{
+    if(isEqual(props,this.props)){
+      this.props.listAllPolls();
+    }
   }
 
   render() {

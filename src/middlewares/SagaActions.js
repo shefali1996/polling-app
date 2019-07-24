@@ -5,7 +5,13 @@ import {
   responseAction,
   listUsersSuccess,
   listAllPollsSuccess,
-  viewPollSuccess
+  viewPollSuccess,
+  addOptionSuccess,
+  deleteOptionSuccess,
+  updateTitleSuccess,
+  addPollSuccess,
+  viewPoll as view,
+  listAllPolls as list
 } from "../actions/Actions";
 import { put } from "redux-saga/effects";
 
@@ -62,7 +68,7 @@ const loginUserRequest = user => {
 
 const addPollRequest = poll => {
   const notify = alert => toast(alert);
-  axios
+  return axios
     .post(
       `https://secure-refuge-14993.herokuapp.com/add_poll?title=${
         poll.title
@@ -71,13 +77,15 @@ const addPollRequest = poll => {
       }____${poll.options[3].option4}`
     )
     .then(function(response) {
-      if (response.data.error === 0) {
-        {
-          notify("Poll Added Sucessfully");
-        }
-      } else {
-        notify(response.data.message);
-      }
+      console.log(response.data,'addpiolllllllll')
+      // if (response.data.error === 0) {
+      //   {
+      //     notify("Poll Added Sucessfully");
+      //   }
+      // } else {
+      //   notify(response.data.message);
+      // }
+      return response.data
     })
     .catch(function(error) {
       notify(error);
@@ -144,7 +152,7 @@ const addOptionRequest = (option4, id) => {
       `https://secure-refuge-14993.herokuapp.com/add_new_option?id=${id}&option_text=${option4}`
     )
     .then(function(response) {
-      notify("option Added");
+      return response.data
     })
     .catch(function(error) {
       notify(error);
@@ -158,7 +166,7 @@ const deleteOptionRequest = (val, id) => {
       `https://secure-refuge-14993.herokuapp.com/delete_poll_option?id=${id}&option_text=${val}`
     )
     .then(function(response) {
-      notify("option deleted");
+      return response.data
     })
     .catch(function(error) {
       notify(error);
@@ -172,7 +180,7 @@ const updateTitleRequest = (new_title, id) => {
       `https://secure-refuge-14993.herokuapp.com/update_poll_title?id=${id}&title=${new_title}`
     )
     .then(function(response) {
-      notify("title updateds");
+      return response.data
     })
     .catch(function(error) {
       notify(error);
@@ -200,7 +208,9 @@ export function* login(action) {
   yield put(responseAction(responseData));
 }
 export function* addPoll(action) {
-  yield addPollRequest(action.payload);
+  let addPollData=yield addPollRequest(action.payload);
+  console.log(addPollData,'00000000000')
+  yield put(addPollSuccess(addPollData));
 }
 
 export function* listUsers() {
@@ -214,26 +224,42 @@ export function* listAllPolls() {
 }
 
 export function* viewPoll(action) {
+  console.log('22222222');
+  
   let viewPollData = yield viewPollRequest(action.payload);
+  console.log(viewPollData,action.payload,'66666666666');
+  
   yield put(viewPollSuccess(viewPollData));
 }
 
 export function* doVote(action) {
   yield doVoteRequest(action.payload.val, action.payload.id);
+  yield put(view(action.payload.id))
 }
 
 export function* addOption(action) {
-  yield addOptionRequest(action.payload.option4, action.payload.id);
+  let addOptionData=yield addOptionRequest(action.payload.option4, action.payload.id);
+  yield put(addOptionSuccess(addOptionData));
+  yield put(view(action.payload.id))
+
 }
 
 export function* deleteOption(action) {
-  yield deleteOptionRequest(action.payload.val, action.payload.id);
+  let deleteOptionData=yield deleteOptionRequest(action.payload.val, action.payload.id);
+  yield put(deleteOptionSuccess(deleteOptionData))
+  yield put(view(action.payload.id))
 }
 
 export function* updateTitle(action) {
-  yield updateTitleRequest(action.payload.new_title, action.payload.id);
+  let updateTitleData=yield updateTitleRequest(action.payload.new_title, action.payload.id);
+  yield put(updateTitleSuccess(updateTitleData));
+  yield put(view(action.payload.id))
+
+
 }
 
 export function* deletePoll(action) {
   yield deletePollRequest(action.payload);
+  yield put(list());
+  
 }
