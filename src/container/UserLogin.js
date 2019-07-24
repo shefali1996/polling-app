@@ -16,7 +16,6 @@ class UserLogin extends Component {
     });
   };
   loginUser_obj = () => {
-    if (this.state.username && this.state.password !== "") {
       let user = { ...this.state };
       this.props.login(user);
       this.setState({
@@ -24,7 +23,6 @@ class UserLogin extends Component {
         password: "",
         loggedIn: true
       });
-    }
     this.props.loginStatus(!this.state.loggedIn);
   };
   componentDidUpdate(props) {
